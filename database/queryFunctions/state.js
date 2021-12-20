@@ -21,3 +21,14 @@ module.exports.getByCode = async (data) => {
   });
 };
 
+module.exports.getByName = async (data) => {
+  return new Promise((resolve, reject) => {
+    knex(table)
+      .select('*')
+      .where({d_estado: data})
+      .then(function (result) {
+        resolve(result);
+      }, err => { reject(err); });
+  });
+};
+

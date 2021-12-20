@@ -25,46 +25,13 @@ function throwAjvError(error) {
   } else if (err.error == 'itemDoesNotExist') {
     err.status = 404;
     err.params = undefined;
-  } else if (error === 'errorInRobot') {
-    err = {
-      error,
-      status: 500
-    };
-    return err;
-  }
-  if(error.errors.length > 1){
-    if(error.errors[error.errors.length - 1].keyword == 'anyOf'){
-      err = {
-        error: 'anyOf',
-        params: {
-          properties: []
-        },
-        status: 400
-      };
-      for(let i=0; i < error.errors.length - 1; i++){
-        err.params.properties.push(error.errors[i].params.missingProperty);
-      }
-    }
-    else if(error.errors[error.errors.length - 1].keyword == 'oneOf'){
-      err = {
-        error: 'oneOf',
-        params: {
-          properties: []
-        },
-        status: 400
-      };
-      for(let i=0; i < error.errors.length - 1; i++){
-        err.params.properties.push(error.errors[i].params.missingProperty);
-      }
-    }
-  } else {
-    err = {
-      error: error.errors[0].keyword,
-      dataPath: error.errors[0].dataPath,
-      params: error.errors[0].params,
-      status: 400
-    };
-  }
+  } 
+  err = {
+    error: error.errors[0].keyword,
+    dataPath: error.errors[0].dataPath,
+    params: error.errors[0].params,
+    status: 400
+  };
   return err;
 }
 

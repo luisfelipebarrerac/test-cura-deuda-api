@@ -20,11 +20,13 @@ app.use(appEndpoint, require('./routes/publics'));
 //#region middlewares section
 let routes = [];
 app.use(middleware.tokenValidator);
-app.use(middleware.permissionsValidator);
 app.use(middleware.routesValidator(routes));
 //#endregion
 
 //#region private routes section
+app.use(appEndpoint + '/settlements', require('./routes/settlements'));
+app.use(appEndpoint + '/municipalities', require('./routes/municipalities'));
+app.use(appEndpoint + '/states', require('./routes/states'));
 //User section
 
 //#endregion

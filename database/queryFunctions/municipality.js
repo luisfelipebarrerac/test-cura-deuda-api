@@ -10,11 +10,11 @@ module.exports.insert = async (data) => {
   });
 };
 
-module.exports.getByCode = async (data) => {
+module.exports.getByName = async (data) => {
   return new Promise((resolve, reject) => {
     knex(table)
-      .select('id')
-      .where({c_mnpio: data})
+      .select('*')
+      .where({D_mnpio: data})
       .then(function (result) {
         resolve(result);
       }, err => { reject(err); });
