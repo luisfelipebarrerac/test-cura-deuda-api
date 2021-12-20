@@ -1,0 +1,36 @@
+{
+  "name": "intel_evo_dashboard_api",
+  "version": "1.0.0",
+  "description": "API para el proyecto Intel EVO",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "imgReload": "node ./libs/mapLoader.js",
+    "db": "mysql -u root -p < ./database/tablesCreation/master.sql",
+    "alterPathTable": "mysql -u root -p < ./database/tablesCreation/9_alterTable_path.sql",
+    "format": "node ./libs/format.js"
+  },
+  "author": "Manuel Robles, Alan Ojeda, Felipe Barrera, Jorge Carrión",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^5.2.0",
+    "ajv-base64": "^1.0.0",
+    "ajv-keywords": "^3.5.0",
+    "cors": "^2.8.3",
+    "crc": "^3.8.0",
+    "express": "^4.16.2",
+    "generate-password": "^1.4.2",
+    "jsonwebtoken": "^7.4.1",
+    "knex": "^0.20.8",
+    "morgan": "^1.8.2",
+    "mysql": "^2.18.1",
+    "nvm": "0.0.4",
+    "request": "^2.88.0",
+    "timeout-callback": "^2.0.2",
+    "uuid": "^7.0.3",
+    "xlsx": "^0.17.4"
+  },
+  "devDependencies": {
+    "eslint": "^7.18.0"
+  }
+}
