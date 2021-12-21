@@ -5,10 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "imgReload": "node ./libs/mapLoader.js",
-    "db": "mysql -u root -p < ./database/tablesCreation/master.sql",
-    "alterPathTable": "mysql -u root -p < ./database/tablesCreation/9_alterTable_path.sql",
-    "format": "node ./libs/format.js"
+    "db:master": "mysql -u root -p < ./database/tablesCreation/master.sql",
+    "format": "node ./libs/format.js",
+    "excel": "node ./libs/excelTransfer.js"
   },
   "author": "Manuel Robles, Alan Ojeda, Felipe Barrera, Jorge Carrión",
   "license": "ISC",

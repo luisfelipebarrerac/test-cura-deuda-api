@@ -20,3 +20,14 @@ module.exports.getByName = async (data) => {
       }, err => { reject(err); });
   });
 };
+
+module.exports.getByCode = async (data) => {
+  return new Promise((resolve, reject) => {
+    knex(table)
+      .select('id')
+      .where({c_mnpio: data})
+      .then(function (result) {
+        resolve(result);
+      }, err => { reject(err); });
+  });
+};
