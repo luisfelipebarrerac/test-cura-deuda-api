@@ -24,10 +24,11 @@ This is an APIs in nodejs 14.8.0, this API
 
 ## Fill Database
 
-- Go to https://www.correosdemexico.gob.mx/SSLServicios/ConsultaCP/CodigoPostal_Exportar.aspx
+- There is a excel of the information provided by SEPOMEX in the proyect
+- If you want to update the information visit: https://www.correosdemexico.gob.mx/SSLServicios/ConsultaCP/CodigoPostal_Exportar.aspx
 - Select download Excel, ---- TODOS ----
 - Download the file: CPdescargaxls.zip
-- Extract the Excel file paste it in the uploadXls folder inside the proyect
+- Extract the Excel file and replace it in the uploadXls folder with the new File.
 
 - Run `npm run excel` to transfer the data of the file CPdescarga.xls to the database.
 
