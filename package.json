@@ -1,7 +1,7 @@
 {
-  "name": "intel_evo_dashboard_api",
+  "name": "sepo_mex_api",
   "version": "1.0.0",
-  "description": "API para el proyecto Intel EVO",
+  "description": "API para el SEPOMEX",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -9,7 +9,7 @@
     "format": "node ./libs/format.js",
     "excel": "node ./libs/excelTransfer.js"
   },
-  "author": "Manuel Robles, Alan Ojeda, Felipe Barrera, Jorge Carrión",
+  "author": "Luis Felipe Barrera Cervantes",
   "license": "ISC",
   "dependencies": {
     "ajv": "^5.2.0",
