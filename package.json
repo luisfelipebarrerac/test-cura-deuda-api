@@ -7,7 +7,8 @@
     "start": "node server.js",
     "db:master": "mysql -u root -p < ./database/tablesCreation/master.sql",
     "format": "node ./libs/format.js",
-    "excel": "node ./libs/excelTransfer.js"
+    "import:excel": "node ./libs/excelTransfer.js",
+    "download:excel": "node ./libs/scrape.js"
   },
   "author": "Luis Felipe Barrera Cervantes",
   "license": "ISC",
@@ -24,8 +25,11 @@
     "morgan": "^1.8.2",
     "mysql": "^2.18.1",
     "nvm": "0.0.4",
+    "puppeteer": "^13.0.1",
     "request": "^2.88.0",
+    "request-promise-native": "^1.0.9",
     "timeout-callback": "^2.0.2",
+    "unzipper": "^0.10.11",
     "uuid": "^7.0.3",
     "xlsx": "^0.17.4"
   },

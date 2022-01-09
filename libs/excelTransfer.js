@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const path = require('path');
 const filePath = path.join(__dirname, '../uploadXls/');
 const XLSX = require('xlsx');
