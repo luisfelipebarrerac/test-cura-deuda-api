@@ -7,7 +7,7 @@
     "start": "node server.js",
     "db:master": "mysql -u root -p < ./database/tablesCreation/master.sql",
     "format": "node ./libs/format.js",
-    "import:excel": "node ./libs/excelTransfer.js",
+    "import:excel": "node ./libs/excel-transfer.js",
     "download:excel": "node ./libs/scrape.js"
   },
   "author": "Luis Felipe Barrera Cervantes",

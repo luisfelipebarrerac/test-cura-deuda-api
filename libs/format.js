@@ -1,7 +1,10 @@
+//#region File Dependencies 
 const fs = require('fs');
 const path = require('path');
+//#endregion
 
-var tempConfig = {
+//#region Config File Build
+let tempConfig = {
   express: {
     endpoint: '<api endpoint>',
     hostname: 'localhost',
@@ -18,6 +21,8 @@ var tempConfig = {
   secretKey: 'ñla8923e67f',
 };
 
-var st = JSON.stringify(tempConfig, null, '  ');
-var st2 = `module.exports = ${st};`;
+let st = JSON.stringify(tempConfig, null, '  ');
+let st2 = `module.exports = ${st};`;
+// eslint-disable-next-line no-undef
 fs.writeFile(path.join(__dirname, '../') + 'config.js', st2, function () {});
+//#endregion

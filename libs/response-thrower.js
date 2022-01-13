@@ -1,4 +1,5 @@
-function responseThrower(res, logId, status, body) {
+//#region Response Thrower Functions
+const responseThrower = (res, logId, status, body) => {
   if (!status) status = 200;
 
   if (status == 400) {
@@ -7,11 +8,10 @@ function responseThrower(res, logId, status, body) {
     delete body.status;
   }
   res.status(status).json(body);
-}
+};
 
 function throwAjvError(error) {
   let err = {error: 'unknown', status:400};
-
   if (err.error == 'required') {
     err.dataPath = err.dataPath + '.' + err.params.missingProperty;
     err.params = undefined;
@@ -34,5 +34,10 @@ function throwAjvError(error) {
   };
   return err;
 }
+//#endregion
 
-module.exports.responseThrower = responseThrower;
+//#region Module Exports
+module.exports = {
+  responseThrower,
+};
+//#endregion

@@ -1,29 +1,19 @@
+//#region File Dependencies 
 /* eslint-disable no-undef */
 const puppeteer = require('puppeteer');
 const unzipper = require('unzipper');
 const config = require('../config');
 const path = require('path');
 const fs = require('fs');
+//#endregion
 
 //#region Global Const
 const url = config.url;
 const pupLaunch = config.pupLaunch;
-const filePath = path.resolve(__dirname, 'temp');
-const oldPath = config.filePath;
+const tempPath = path.resolve(__dirname, config.tempPath);
 const zipPath = path.join(__dirname, config.zipPath);
-const xlsPath = path.join(__dirname, '../uploadXls/');
+const xlsPath = path.join(__dirname, config.xlsPath);
 //#endregion
-
-const main = async () => {
-  try {
-    await downloadXlsZip();
-    //await renameFile();
-    await unZip();
-    await deleteTemp();
-  } catch (error) {
-    console.error(error)
-  }
-};
 
 //#region Functions
 async function downloadXlsZip() {
@@ -35,7 +25,7 @@ async function downloadXlsZip() {
     const client = await page.target().createCDPSession();
     await client.send('Page.setDownloadBehavior', {
       behavior: 'allow',
-      downloadPath: filePath
+      downloadPath: tempPath
     });
     await page.click('input#btnDescarga');
     await page.waitForTimeout(10000);
@@ -44,12 +34,6 @@ async function downloadXlsZip() {
   } catch (error) {
     console.error(error);
   }
-}
-
-async function renameFile() {
-  await fs.rename(oldPath, zipPath, () => {
-  });
-  console.log('File Renamed...');
 }
 
 async function deleteTemp() {
@@ -69,6 +53,16 @@ async function unZip() {
 }
 //#endregion
 
+const main = async () => {
+  try {
+    await downloadXlsZip();
+    //await renameFile();
+    await unZip();
+    await deleteTemp();
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 main();
 

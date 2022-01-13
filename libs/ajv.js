@@ -1,13 +1,13 @@
+//#region File Dependencies 
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable no-unused-vars */
 var Ajv = require('ajv');
 var ajv = new Ajv({$data: true, useDefaults: true});
 require('ajv-keywords')(ajv, ['formatMinimum', 'formatMaximum']);
 var db = require('../database/queryFunctions');
+//#endregion
 
-ajv.ValidationError = Ajv.ValidationError;
-
-
+//#region Validation Strategies
 ajv.addKeyword('validateUniqueness', {
   async: true,
   validate: (schema, data, parentSchema, currentPath, parentObject, propertyInParentObject, rootData) =>
@@ -39,5 +39,10 @@ ajv.addKeyword('validateUniqueness', {
       }
     }),
 });
+//#endregion
 
+ajv.ValidationError = Ajv.ValidationError;
+
+//#region Module Exports
 module.exports = ajv;
+//#endregion

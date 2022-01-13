@@ -1,3 +1,4 @@
+//#region List Functions
 module.exports = (appStack) => {
   let routes = [];
   function print(path, layer) {
@@ -35,3 +36,5 @@ module.exports = (appStack) => {
   appStack.forEach(print.bind(null, []));
   return routes;
 };
+//#endregion
+

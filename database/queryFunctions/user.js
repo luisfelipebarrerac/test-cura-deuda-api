@@ -1,21 +1,17 @@
+//#region File Dependencies 
 const knex = require('./knex');
 const crypto = require('crypto');
+//#endregion
 
+//#region Global Variables
 const table = 'user';
+//#endregion
 
-const sha512 = (password, salt) => {
-  var hash = crypto.createHmac('sha512', salt); /** Hashing algorithm sha512 */
-  hash.update(password);
-  var value = hash.digest('hex');
-  return value;
-};
-
-exports.sha512 = sha512;
-
-module.exports.getByUsername = async (data) => {
+//#region User Query Functions
+const getByUsername = async (data) => {
   return new Promise((resolve, reject) => {
     knex(table)
-      .select('id', 'password')
+      .select('*')
       .where({username: data})
       .then(function (result) {
         resolve(result[0]);
@@ -23,16 +19,32 @@ module.exports.getByUsername = async (data) => {
   });
 };
 
-module.exports.validateUser = async (id, password) => {
+const validateUser = async (id, password) => {
   return new Promise((resolve, reject) => {
     knex(table)
       .select('password', 'salt')
-      .where({id: id})
-      .then((result) => {
+      .where({id})
+      .then(async (result) => {
         const user = result[0];
-        const shaPassword = sha512(password, user.salt);
+        const shaPassword = await sha512(password, user.salt);
         resolve(user.password == shaPassword);
       }, err => { reject(err); });
   });
 };
+//#endregion
 
+//#region Sha Strategy
+const sha512 = async (password, salt) => {
+  var hash = crypto.createHmac('sha512', salt); /** Hashing algorithm sha512 */
+  hash.update(password);
+  var value = hash.digest('hex');
+  return value;
+};
+//#endregion
+
+//#region Module Exports
+module.exports =  {
+  getByUsername,
+  validateUser,
+};
+//#endregion

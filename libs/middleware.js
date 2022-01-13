@@ -1,15 +1,12 @@
+//#region File Dependencies 
 const jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 const config = require('../config');
 const db = require('../database/queryFunctions');
-const responseThrower = require('./responseThrower.js').responseThrower;
+const responseThrower = require('./response-thrower.js').responseThrower;
+//#endregion
 
-exports.storageInit = (req, res, next) => {
-  req.storage = {};
-  next();
-};
-
-// Middleware for route validation
-exports.routesValidator = (routes) => {
+//#region Middleware route validation
+const routesValidator = (routes) => {
   return (req, res, next) => {
     // Verificar que la ruta existe
     let pathname = req._parsedUrl.pathname.split(/\d+/);
@@ -23,9 +20,10 @@ exports.routesValidator = (routes) => {
     }
   };
 };
+//#endregion
 
-// Middleware for token validation
-exports.tokenValidator = (req, res, next) => {
+//#region Middleware token validation
+const tokenValidator = (req, res, next) => {
   // check header or url parameters or post parameters for token
   if (req.headers && req.headers['refer']) {
     var t = req.headers['refer'].split('?token=%');
@@ -95,4 +93,19 @@ exports.tokenValidator = (req, res, next) => {
     responseThrower(res, req.logId, 401, { error: 'tokenNotProvided' });
   }
 };
+//#endregion
 
+//#region Middleware Functions
+const storageInit = (req, res, next) => {
+  req.storage = {};
+  next();
+};
+//#endregion
+
+//#region Module Exports
+module.exports = {
+  storageInit,
+  tokenValidator,
+  routesValidator,
+};
+//#endregion
