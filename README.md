@@ -1,6 +1,6 @@
 # SEPOMEX api
 
-This is an APIs in nodejs 14.8.0, this API
+This is an APIs in nodejs 14.8.0
 
 - use mysql 5.7.28, and server use mysql Ver 14.14 Distrib 5.7.18
 - has md5 hashing of passwords
