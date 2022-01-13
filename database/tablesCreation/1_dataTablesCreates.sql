@@ -2,8 +2,6 @@ DROP DATABASE IF EXISTS sepo_mex_db;
 CREATE DATABASE sepo_mex_db;
 USE sepo_mex_db;
 
-
-
 DROP TABLE IF EXISTS user;
 CREATE TABLE user (
   -- specific fields

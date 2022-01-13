@@ -2,6 +2,6 @@
 source ./database/tablesCreation/1_dataTablesCreates.sql
 
 -- Script que agrega datos
-source ./database/tablesCreation/4_dataInsertion.sql
+source ./database/tablesCreation/1_dataInsertion.sql
 
 

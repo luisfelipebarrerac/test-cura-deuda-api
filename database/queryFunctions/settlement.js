@@ -1,7 +1,10 @@
+//#region File Dependencies 
 const knex = require('./knex');
 const table = 'settlement';
+//#endregion
 
-module.exports.insert = async (data) => {
+//#region Settlement Query Functions
+const insert = async (data) => {
   return new Promise((resolve, reject) => {
     knex(table).insert(data)
       .then(function (result) {
@@ -10,7 +13,7 @@ module.exports.insert = async (data) => {
   });
 };
 
-module.exports.getByCp = async (data) => {
+const getByCp = async (data) => {
   return new Promise((resolve, reject) => {
     knex(table)
       .select('*')
@@ -21,7 +24,7 @@ module.exports.getByCp = async (data) => {
   });
 };
 
-module.exports.getByName = async (data) => {
+const getByName = async (data) => {
   return new Promise((resolve, reject) => {
     knex(table)
       .select('*')
@@ -31,3 +34,12 @@ module.exports.getByName = async (data) => {
       }, err => { reject(err); });
   });
 };
+//#endregion
+
+//#region Module Exports
+module.exports = {
+  insert,
+  getByCp,
+  getByName,
+};
+//#endregion

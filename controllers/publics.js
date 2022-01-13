@@ -1,33 +1,39 @@
+//#region File Dependencies 
 const express = require('express');
 const db = require('../database/queryFunctions');
 const Ajv = require('ajv');
 const ajv = new Ajv();
 const config = require('../config');
 var jwt = require('jsonwebtoken'); 
-const responseThrower = require('../libs/responseThrower.js').responseThrower;
-const {publicAuthSchema} = require('../schemas/routesSchemas');
+const responseThrower = require('../libs/response-thrower.js').responseThrower;
+const {publicAuthSchema} = require('../schemas/routes-schemas');
 const router = express.Router();
+//#endregion
 
+//#region Global Variables
+const tokenExpire = { expiresIn: 28800 };
+const key = config.secretKey;
+const InvalidCredentialsMessage = { error: 'InvalidCredentials' };
+//#endregion
+
+//#region Publics Controller
 router.post('/authenticate', async (req, res) => {
   const data = req.body;
   try {
     await ajv.validate(publicAuthSchema, data);
-    const { username } = data;
-    const user = await db.user.getByUsername(username);
-    if(user){
-      const isValidated = await db.user.validateUser(user.id, data.password);
+    const { user, password } = data;
+    const {id, username} = await db.user.getByUsername(user);
+    if(username){
+      const isValidated = await db.user.validateUser(id, password);
       if(isValidated){
+        const singOptions = {
+          id,
+          username
+        };
         const token = jwt.sign(
-          {
-            id: user.id,
-            username: user.username,
-            permissions: user.permissions,
-            client_id: user.client_id,
-          },
-          config.secretKey,
-          {
-            expiresIn: 28800, // expira en 8 horas
-          }
+          singOptions,
+          key,
+          tokenExpire,
         );
         responseThrower(res, req.logId, 200, {
           message: 'Token Provided',
@@ -36,10 +42,10 @@ router.post('/authenticate', async (req, res) => {
           },
         });
       } else {
-        responseThrower(res, req.logId, 401, {error: 'InvalidCredentials' });
+        responseThrower(res, req.logId, 401, InvalidCredentialsMessage);
       }
     } else {
-      responseThrower(res, req.logId, 401, {error: 'InvalidCredentials' });
+      responseThrower(res, req.logId, 401, InvalidCredentialsMessage);
     }
   } catch (error) {
     if (error instanceof Ajv.ValidationError) {
@@ -50,6 +56,8 @@ router.post('/authenticate', async (req, res) => {
     }
   }
 });
+//#endregion
 
-
+//#region Module Exports
 module.exports = router;
+//#endregion 

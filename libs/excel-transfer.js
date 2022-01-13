@@ -1,3 +1,4 @@
+//#region File Dependencies 
 /* eslint-disable no-undef */
 const path = require('path');
 const filePath = path.join(__dirname, '../uploadXls/');
@@ -5,25 +6,12 @@ const XLSX = require('xlsx');
 const fs = require('fs');
 const db = require('../database/queryFunctions');
 const { exit } = require('process');
+//#endregion
+
+//#region Global Variables
 let xlSheetList;
 let workbook;
-
-const importXls = async () => {
-  console.log('Importando datos a la db...');
-  const xlsNames = await getXlsNames(filePath);
-  workbook = XLSX.readFile(filePath + xlsNames[0]);
-  xlSheetList = workbook.SheetNames;
-  for (let i = 1; i < xlSheetList.length; i++) {
-    const index = parseInt(i);
-    console.log('Insertando: ' + xlSheetList[index]);
-    await insertStates(index);
-    await insertMunicipality(index);
-    await insertCity(index);
-    await insertSettlement(index);
-  }
-  console.log('Datos importados a la db...');
-  exit();
-};
+//#endregion
 
 //#region Insert funtions
 const insertStates = async (index) => {
@@ -141,6 +129,22 @@ function removeDuplicates(originalArray, prop) {
 }
 //#endregion
 
+const importXls = async () => {
+  console.log('Importando datos a la db...');
+  const xlsNames = await getXlsNames(filePath);
+  workbook = XLSX.readFile(filePath + xlsNames[0]);
+  xlSheetList = workbook.SheetNames;
+  for (let i = 1; i < xlSheetList.length; i++) {
+    const index = parseInt(i);
+    console.log('Insertando: ' + xlSheetList[index]);
+    await insertStates(index);
+    await insertMunicipality(index);
+    await insertCity(index);
+    await insertSettlement(index);
+  }
+  console.log('Datos importados a la db...');
+  exit();
+};
 
 importXls();
 
