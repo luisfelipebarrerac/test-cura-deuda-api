@@ -3,7 +3,7 @@ const express = require('express');
 const Ajv = require('ajv');
 const ajv = new Ajv();
 const responseThrower = require('../libs/response-thrower.js').responseThrower;
-const {getMunicipalityByStateSchema, getMunicipalitySchema, getMunicipalityByCodeSchema} = require('../schemas/routes-schemas');
+const {getMunicipalityByStateSchema, getMunicipalitySchema, getMunicipalityByCodeSchema} = require('../schemas/routesSchemas');
 const router = express.Router();
 const municipalityService = require('../services/municipality');
 //#endregion
