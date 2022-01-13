@@ -22,17 +22,15 @@ This is an APIs in nodejs 14.8.0, this API
 * Fill express section with your own port and end point.
 * Fill mysql information for database, the recomendation its use host:"localhost" and your root user and password.
 
+## Download SEPOMEX data
+
+- Run `npm run download:excel` to download the data of SEPOMEX
+
 ## Fill Database
 
-- There is a excel of the information provided by SEPOMEX in the proyect
-- If you want to update the information visit: https://www.correosdemexico.gob.mx/SSLServicios/ConsultaCP/CodigoPostal_Exportar.aspx
-- Select download Excel, ---- TODOS ----
-- Download the file: CPdescargaxls.zip
-- Extract the Excel file and replace it in the uploadXls folder with the new File.
-
-- Run `npm run excel` to transfer the data of the file CPdescarga.xls to the database.
+- Run `npm run import:excel` to transfer the data of the file CPdescarga.xls to the database.
 
 ## Commands
 
-- To restart the database, please run in console `npm run db`.
+- To restart the database, please run in console `npm run db:master`.
 - To run the API, please write `npm start`.
