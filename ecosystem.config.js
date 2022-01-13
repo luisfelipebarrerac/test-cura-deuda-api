@@ -1,5 +1,8 @@
+//#endregion Global Variables
 const name = 'sepomex-api';
+//#endregion
 
+//#region Module Exports
 module.exports = {
   apps: [
     {
@@ -18,3 +21,5 @@ module.exports = {
     },
   ],
 };
+//#endregion
+
