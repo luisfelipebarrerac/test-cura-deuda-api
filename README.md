@@ -12,7 +12,6 @@ This is an APIs in nodejs 14.8.0
 - First install mysql and node.js required versions.
 - Change directory to the proyect then:
 - Install all npm packages, run in console `npm install`.
-- Run `npm run db:master` to initial database.
 - Run `npm run format` to create a dummy config.
 
 ## Config
@@ -28,6 +27,7 @@ This is an APIs in nodejs 14.8.0
 
 ## Fill Database
 
+- First run `npm run db:master` to initial database.
 - Run `npm run import:excel` to transfer the data of the file CPdescarga.xls to the database.
 
 ## Commands
